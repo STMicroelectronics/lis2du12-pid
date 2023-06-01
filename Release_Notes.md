@@ -30,15 +30,27 @@ This directory contains the LIS2DU12 component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section1" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section1" aria-hidden="true">
 <label for="collapse-section1" aria-hidden="true">V1.0.0 / 14-November-2022</label>
-<div>			
+<div>
 
 ## Main changes
 
 ### First release
 
 - First official release [ref. DS v2.0]
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section2" checked aria-hidden="true">
+<label for="collapse-section2" aria-hidden="true">V1.1.0 / 01-June-2023</label>
+<div>
+
+## Main changes
+
+Add __weak directive to read/write registers routines
 
 ##
 
