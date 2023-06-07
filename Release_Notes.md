@@ -44,13 +44,25 @@ This directory contains the LIS2DU12 component drivers.
 
 </div>
 
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section2" aria-hidden="true">
 <label for="collapse-section2" aria-hidden="true">V1.1.0 / 01-June-2023</label>
 <div>
 
 ## Main changes
 
-Add __weak directive to read/write registers routines
+- Add __weak directive to read/write registers routines
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true">
+<label for="collapse-section3" aria-hidden="true">V1.1.1 / 07-June-2023</label>
+<div>
+
+## Main changes
+
+- Fix bug in wake_up_mode_set() API
 
 ##
 
