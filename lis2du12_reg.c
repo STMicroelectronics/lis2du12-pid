@@ -1280,6 +1280,7 @@ int32_t lis2du12_wake_up_mode_set(stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val)
                            (uint8_t*)&wake_up_dur, 1);
   ret += lis2du12_write_reg(ctx, LIS2DU12_MD1_CFG, (uint8_t*)&md1_cfg, 1);
   ret += lis2du12_write_reg(ctx, LIS2DU12_CTRL1, (uint8_t*)&ctrl1, 1);
+  ret += lis2du12_write_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
 
   return ret;
 }
