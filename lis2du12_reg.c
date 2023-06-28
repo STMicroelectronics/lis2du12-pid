@@ -493,8 +493,8 @@ int32_t lis2du12_mode_get(stmdev_ctx_t *ctx, lis2du12_md_t *val)
     case LIS2DU12_OFF:
       val->odr = LIS2DU12_OFF;
       break;
-    case LIS2DU12_1Hz5_ULP:
-      val->odr = LIS2DU12_1Hz5_ULP;
+    case LIS2DU12_1Hz6_ULP:
+      val->odr = LIS2DU12_1Hz6_ULP;
       break;
     case LIS2DU12_3Hz_ULP:
       val->odr = LIS2DU12_3Hz_ULP;
@@ -1344,8 +1344,8 @@ int32_t lis2du12_wake_up_mode_get(stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val)
     case LIS2DU12_SLEEP_AT_3Hz:
       val->sleep.odr = LIS2DU12_SLEEP_AT_3Hz;
       break;
-    case LIS2DU12_SLEEP_AT_1Hz5:
-      val->sleep.odr = LIS2DU12_SLEEP_AT_1Hz5;
+    case LIS2DU12_SLEEP_AT_1Hz6:
+      val->sleep.odr = LIS2DU12_SLEEP_AT_1Hz6;
       break;
     default:
       val->sleep.odr = LIS2DU12_DO_NOT_CHANGE;
