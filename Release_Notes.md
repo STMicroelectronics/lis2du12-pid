@@ -68,13 +68,25 @@ This directory contains the LIS2DU12 component drivers.
 
 </div>
 
-<input type="checkbox" id="collapse-section4" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
 <label for="collapse-section4" aria-hidden="true">V1.1.2 / 28-June-2023</label>
 <div>
 
 ## Main changes
 
 - Fix typos in ODR define names and comments
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section5" checked aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true">V1.1.3 / 24-July-2023</label>
+<div>
+
+## Main changes
+
+- Fix typo (x_wu vs z_wu field)
 
 ##
 
