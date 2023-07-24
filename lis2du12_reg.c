@@ -430,7 +430,7 @@ int32_t lis2du12_all_sources_get(stmdev_ctx_t *ctx,
 
       val->wake_up_z = wu_src.z_wu;
       val->wake_up_y = wu_src.y_wu;
-      val->wake_up_x = wu_src.z_wu;
+      val->wake_up_x = wu_src.x_wu;
       val->sleep_state = wu_src.sleep_state;
     }
 
