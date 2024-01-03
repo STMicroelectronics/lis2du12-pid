@@ -699,9 +699,9 @@ typedef union{
  * them with a custom implementation.
  */
 
-int32_t lis2du12_read_reg(stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
+int32_t lis2du12_read_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
                           uint16_t len);
-int32_t lis2du12_write_reg(stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
+int32_t lis2du12_write_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
                            uint16_t len);
 
 float_t lis2du12_from_fs2g_to_mg(int16_t lsb);
@@ -713,7 +713,7 @@ float_t lis2du12_from_lsb_to_celsius(int16_t lsb);
 typedef struct {
   uint8_t whoami;
 } lis2du12_id_t;
-int32_t lis2du12_id_get(stmdev_ctx_t *ctx, lis2du12_id_t *val);
+int32_t lis2du12_id_get(const stmdev_ctx_t *ctx, lis2du12_id_t *val);
 
 typedef enum {
     LIS2DU12_SEL_BY_HW   = 0x00, /* bus mode select by HW (SPI 3W disable) */
@@ -721,15 +721,15 @@ typedef enum {
     LIS2DU12_SPI_3W      = 0x07, /* Only SPI: SDO / SDI share the same pin */
     LIS2DU12_I3C_DISABLE = 0x01, /* Select by HW (SPI 3W and I3C disable) */
 } lis2du12_bus_mode_t;
-int32_t lis2du12_bus_mode_set(stmdev_ctx_t *ctx, lis2du12_bus_mode_t val);
-int32_t lis2du12_bus_mode_get(stmdev_ctx_t *ctx, lis2du12_bus_mode_t *val);
+int32_t lis2du12_bus_mode_set(const stmdev_ctx_t *ctx, lis2du12_bus_mode_t val);
+int32_t lis2du12_bus_mode_get(const stmdev_ctx_t *ctx, lis2du12_bus_mode_t *val);
 
 typedef enum {
   LIS2DU12_DRV_RDY   = 0x00, /* Initialize the device for driver usage */
   LIS2DU12_BOOT      = 0x01, /* Restore calib. param. ( it takes 10ms ) */
   LIS2DU12_RESET     = 0x02, /* Reset configuration registers */
 } lis2du12_init_t;
-int32_t lis2du12_init_set(stmdev_ctx_t *ctx, lis2du12_init_t val);
+int32_t lis2du12_init_set(const stmdev_ctx_t *ctx, lis2du12_init_t val);
 
 typedef struct {
   uint8_t sw_reset           : 1; /* Restoring configuration registers */
@@ -737,7 +737,7 @@ typedef struct {
   uint8_t drdy_xl            : 1; /* Accelerometer data ready */
   uint8_t power_down         : 1; /* Monitors power-down. */
 } lis2du12_status_t;
-int32_t lis2du12_status_get(stmdev_ctx_t *ctx, lis2du12_status_t *val);
+int32_t lis2du12_status_get(const stmdev_ctx_t *ctx, lis2du12_status_t *val);
 
 typedef struct {
   uint8_t sdo_pull_up         : 1; /* 1 = pull up enable */
@@ -747,8 +747,8 @@ typedef struct {
   uint8_t int1_pull_down      : 1; /* 1 = pull-down always disabled (0=auto) */
   uint8_t int2_pull_down      : 1; /* 1 = pull-down always disabled (0=auto) */
 } lis2du12_pin_conf_t;
-int32_t lis2du12_pin_conf_set(stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val);
-int32_t lis2du12_pin_conf_get(stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val);
+int32_t lis2du12_pin_conf_set(const stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val);
+int32_t lis2du12_pin_conf_get(const stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val);
 
 typedef struct {
   uint8_t free_fall        :  1; /* free fall event */
@@ -772,7 +772,7 @@ typedef struct {
   uint8_t sleep_change     :  1; /* Act/Inact (or Vice-versa) status changed */
   uint8_t sleep_state      :  1; /* Act/Inact status flag (0-Act / 1-Inact) */
 } lis2du12_all_sources_t;
-int32_t lis2du12_all_sources_get(stmdev_ctx_t *ctx,
+int32_t lis2du12_all_sources_get(const stmdev_ctx_t *ctx,
                                  lis2du12_all_sources_t *val);
 
 typedef enum {
@@ -811,10 +811,10 @@ typedef struct {
   lis2du12_fs_t fs;
   lis2du12_bw_t bw;
 } lis2du12_md_t;
-int32_t lis2du12_mode_set(stmdev_ctx_t *ctx, lis2du12_md_t *val);
-int32_t lis2du12_mode_get(stmdev_ctx_t *ctx, lis2du12_md_t *val);
+int32_t lis2du12_mode_set(const stmdev_ctx_t *ctx, lis2du12_md_t *val);
+int32_t lis2du12_mode_get(const stmdev_ctx_t *ctx, lis2du12_md_t *val);
 
-int32_t lis2du12_trigger_sw(stmdev_ctx_t *ctx, lis2du12_md_t *val);
+int32_t lis2du12_trigger_sw(const stmdev_ctx_t *ctx, lis2du12_md_t *val);
 
 typedef struct {
   struct {
@@ -826,7 +826,7 @@ typedef struct {
     int16_t raw;
   }heat;
 } lis2du12_data_t;
-int32_t lis2du12_data_get(stmdev_ctx_t *ctx, lis2du12_md_t *md,
+int32_t lis2du12_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
                           lis2du12_data_t *data);
 
 typedef enum {
@@ -834,9 +834,9 @@ typedef enum {
   LIS2DU12_ST_POSITIVE = 6,
   LIS2DU12_ST_NEGATIVE = 1,
 } lis2du12_st_t;
-int32_t lis2du12_self_test_sign_set(stmdev_ctx_t *ctx, lis2du12_st_t val);
-int32_t lis2du12_self_test_start(stmdev_ctx_t *ctx, uint8_t val); /* valid values: 1 or 2 */
-int32_t lis2du12_self_test_stop(stmdev_ctx_t *ctx);
+int32_t lis2du12_self_test_sign_set(const stmdev_ctx_t *ctx, lis2du12_st_t val);
+int32_t lis2du12_self_test_start(const stmdev_ctx_t *ctx, uint8_t val); /* valid values: 1 or 2 */
+int32_t lis2du12_self_test_stop(const stmdev_ctx_t *ctx);
 
 typedef enum {
   LIS2DU12_BYPASS            = 0,
@@ -857,16 +857,16 @@ typedef struct {
   lis2du12_fifo_store_t store;
   uint8_t watermark; /* (0 disable) max 127 @16bit, even and max 256 @8bit.*/
 } lis2du12_fifo_md_t;
-int32_t lis2du12_fifo_mode_set(stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val);
-int32_t lis2du12_fifo_mode_get(stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val);
+int32_t lis2du12_fifo_mode_set(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val);
+int32_t lis2du12_fifo_mode_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val);
 
 typedef struct {
   uint8_t fifo_fth         : 1; /* 1 = fifo threshold event */
   uint8_t fifo_ovr         : 1; /* 1 = fifo overrun event */
 } lis2du12_fifo_status_t;
-int32_t lis2du12_fifo_status_get(stmdev_ctx_t *ctx, lis2du12_fifo_status_t *val);
+int32_t lis2du12_fifo_status_get(const stmdev_ctx_t *ctx, lis2du12_fifo_status_t *val);
 
-int32_t lis2du12_fifo_level_get(stmdev_ctx_t *ctx, lis2du12_fifo_md_t *md,
+int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *md,
                                 uint8_t *val);
 
 typedef struct {
@@ -879,7 +879,7 @@ typedef struct {
     int16_t raw;
   }heat;
 } lis2du12_fifo_data_t;
-int32_t lis2du12_fifo_data_get(stmdev_ctx_t *ctx, lis2du12_md_t *md,
+int32_t lis2du12_fifo_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
                                lis2du12_fifo_md_t *fmd,
                                lis2du12_fifo_data_t *data);
 
@@ -894,9 +894,9 @@ typedef struct {
   uint8_t drdy_latched : 1; /* drdy returns to 0 after reading data */
   lis2du12_base_sig_t base_sig;
 } lis2du12_int_mode_t;
-int32_t lis2du12_interrupt_mode_set(stmdev_ctx_t *ctx,
+int32_t lis2du12_interrupt_mode_set(const stmdev_ctx_t *ctx,
                                     lis2du12_int_mode_t *val);
-int32_t lis2du12_interrupt_mode_get(stmdev_ctx_t *ctx,
+int32_t lis2du12_interrupt_mode_get(const stmdev_ctx_t *ctx,
                                     lis2du12_int_mode_t *val);
 
 typedef struct {
@@ -913,14 +913,14 @@ typedef struct {
   uint8_t sleep_change  : 1; /* Act/Inact (or Vice-versa) status changed */
   uint8_t sleep_state   :  1; /* Act/Inact status flag */
 } lis2du12_pin_int_route_t;
-int32_t lis2du12_pin_int1_route_set(stmdev_ctx_t *ctx,
+int32_t lis2du12_pin_int1_route_set(const stmdev_ctx_t *ctx,
                                     lis2du12_pin_int_route_t *val);
-int32_t lis2du12_pin_int1_route_get(stmdev_ctx_t *ctx,
+int32_t lis2du12_pin_int1_route_get(const stmdev_ctx_t *ctx,
                                     lis2du12_pin_int_route_t *val);
 
-int32_t lis2du12_pin_int2_route_set(stmdev_ctx_t *ctx,
+int32_t lis2du12_pin_int2_route_set(const stmdev_ctx_t *ctx,
                                     lis2du12_pin_int_route_t *val);
-int32_t lis2du12_pin_int2_route_get(stmdev_ctx_t *ctx,
+int32_t lis2du12_pin_int2_route_get(const stmdev_ctx_t *ctx,
                                     lis2du12_pin_int_route_t *val);
 
 typedef enum {
@@ -942,8 +942,8 @@ typedef struct {
     lis2du12_sleep_odr_t odr;
   } sleep;
 } lis2du12_wkup_md_t;
-int32_t lis2du12_wake_up_mode_set(stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val);
-int32_t lis2du12_wake_up_mode_get(stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val);
+int32_t lis2du12_wake_up_mode_set(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val);
+int32_t lis2du12_wake_up_mode_get(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val);
 
 typedef enum {
   LIS2DU12_XYZ = 0,
@@ -971,8 +971,8 @@ typedef struct {
     uint8_t latency; /* Max time gap. 0 is 16 ODR_time, 1 LSB : 32 ODR_time. */
   } tap_double;
 } lis2du12_tap_md_t;
-int32_t lis2du12_tap_mode_set(stmdev_ctx_t *ctx, lis2du12_tap_md_t *val);
-int32_t lis2du12_tap_mode_get(stmdev_ctx_t *ctx, lis2du12_tap_md_t *val);
+int32_t lis2du12_tap_mode_set(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val);
+int32_t lis2du12_tap_mode_get(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val);
 
 typedef enum {
   LIS2DU12_156mg = 0,
@@ -989,8 +989,8 @@ typedef struct {
   lis2du12_threshold_t threshold;
   uint8_t duration; /* 1 LSb: 1 ODR_time */
 } lis2du12_ff_md_t;
-int32_t lis2du12_free_fall_mode_set(stmdev_ctx_t *ctx, lis2du12_ff_md_t *val);
-int32_t lis2du12_free_fall_mode_get(stmdev_ctx_t *ctx, lis2du12_ff_md_t *val);
+int32_t lis2du12_free_fall_mode_set(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *val);
+int32_t lis2du12_free_fall_mode_get(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *val);
 
 typedef enum {
   LIS2DU12_DEG_80 = 0,
@@ -1008,9 +1008,9 @@ typedef struct {
   lis2du12_orient_trshld_t threshold;
   lis2du12_deg_of_freedom_t deg_of_freedom;
 } lis2du12_orient_md_t;
-int32_t lis2du12_orientation_mode_set(stmdev_ctx_t *ctx,
+int32_t lis2du12_orientation_mode_set(const stmdev_ctx_t *ctx,
                                       lis2du12_orient_md_t *val);
-int32_t lis2du12_orientation_mode_get(stmdev_ctx_t *ctx,
+int32_t lis2du12_orientation_mode_get(const stmdev_ctx_t *ctx,
                                       lis2du12_orient_md_t *val);
 
 /**
