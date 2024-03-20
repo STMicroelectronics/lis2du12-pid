@@ -23,7 +23,7 @@
 #define LIS2DU12_REGS_H
 
 #ifdef __cplusplus
-  extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -75,7 +75,8 @@
 #ifndef MEMS_SHARED_TYPES
 #define MEMS_SHARED_TYPES
 
-typedef struct{
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t bit0       : 1;
   uint8_t bit1       : 1;
@@ -144,7 +145,8 @@ typedef struct
   *
   */
 
-typedef struct {
+typedef struct
+{
   uint8_t address;
   uint8_t data;
 } ucf_line_t;
@@ -179,7 +181,8 @@ typedef struct {
   */
 
 #define LIS2DU12_IF_PU_CTRL    0x0CU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t not_used_01      : 2;
   uint8_t cs_pu_disc       : 1;
@@ -196,7 +199,8 @@ typedef struct {
 } lis2du12_if_pu_ctrl_t;
 
 #define LIS2DU12_IF_CTRL       0x0EU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t i2c_disable      : 1;
   uint8_t i3c_disable      : 1;
@@ -211,7 +215,8 @@ typedef struct {
 } lis2du12_if_ctrl_t;
 
 #define LIS2DU12_CTRL1         0x10U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t wu_z_en      : 1;
   uint8_t wu_y_en      : 1;
@@ -234,7 +239,8 @@ typedef struct {
 } lis2du12_ctrl1_t;
 
 #define LIS2DU12_CTRL2         0x11U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t not_used_01    : 3;
   uint8_t int1_drdy      : 1;
@@ -253,7 +259,8 @@ typedef struct {
 } lis2du12_ctrl2_t;
 
 #define LIS2DU12_CTRL3         0x12U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t st            : 2;
   uint8_t not_used_01   : 1;
@@ -274,7 +281,8 @@ typedef struct {
 } lis2du12_ctrl3_t;
 
 #define LIS2DU12_CTRL4         0x13U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t boot          : 1;
   uint8_t soc           : 1;
@@ -291,7 +299,8 @@ typedef struct {
 } lis2du12_ctrl4_t;
 
 #define LIS2DU12_CTRL5         0x14U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t fs            : 2;
   uint8_t bw            : 2;
@@ -304,7 +313,8 @@ typedef struct {
 } lis2du12_ctrl5_t;
 
 #define LIS2DU12_FIFO_CTRL     0x15U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t f_mode        : 3;
   uint8_t stop_on_fth   : 1;
@@ -321,7 +331,8 @@ typedef struct {
 } lis2du12_fifo_ctrl_t;
 
 #define LIS2DU12_FIFO_WTM      0x16U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t fth          : 7;
   uint8_t not_used_01  : 1;
@@ -332,7 +343,8 @@ typedef struct {
 } lis2du12_fifo_wtm_t;
 
 #define LIS2DU12_INTERRUPT_CFG 0x17U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t interrupts_enable   : 1;
   uint8_t lir                 : 1;
@@ -355,7 +367,8 @@ typedef struct {
 } lis2du12_interrupt_cfg_t;
 
 #define LIS2DU12_TAP_THS_X     0x18U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t tap_ths_x          : 5;
   uint8_t d6d_ths            : 2;
@@ -368,7 +381,8 @@ typedef struct {
 } lis2du12_tap_ths_x_t;
 
 #define LIS2DU12_TAP_THS_Y     0x19U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t tap_ths_y         : 5;
   uint8_t tap_priority      : 3;
@@ -379,7 +393,8 @@ typedef struct {
 } lis2du12_tap_ths_y_t;
 
 #define LIS2DU12_TAP_THS_Z     0x1AU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t tap_ths_z      : 5;
   uint8_t tap_z_en       : 1;
@@ -394,7 +409,8 @@ typedef struct {
 } lis2du12_tap_ths_z_t;
 
 #define LIS2DU12_INT_DUR       0x1BU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t shock        : 2;
   uint8_t quiet        : 2;
@@ -407,7 +423,8 @@ typedef struct {
 } lis2du12_int_dur_t;
 
 #define LIS2DU12_WAKE_UP_THS   0x1CU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t wk_ths             : 6;
   uint8_t sleep_on           : 1;
@@ -420,7 +437,8 @@ typedef struct {
 } lis2du12_wake_up_ths_t;
 
 #define LIS2DU12_WAKE_UP_DUR    0x1DU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t sleep_dur      : 4;
   uint8_t not_used_01    : 1;
@@ -435,7 +453,8 @@ typedef struct {
 } lis2du12_wake_up_dur_t;
 
 #define LIS2DU12_FREE_FALL     0x1EU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t ff_ths      : 3;
   uint8_t ff_dur      : 5;
@@ -446,7 +465,8 @@ typedef struct {
 } lis2du12_free_fall_t;
 
 #define LIS2DU12_MD1_CFG        0x1FU
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t not_used_01        : 1;
   uint8_t wu_dur_x4          : 1;
@@ -469,7 +489,8 @@ typedef struct {
 } lis2du12_md1_cfg_t;
 
 #define LIS2DU12_MD2_CFG       0x20U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t not_used_01        : 1;
   uint8_t pd_dis_int2        : 1;
@@ -492,7 +513,8 @@ typedef struct {
 } lis2du12_md2_cfg_t;
 
 #define LIS2DU12_WAKE_UP_SRC   0x21U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t z_wu            : 1;
   uint8_t y_wu            : 1;
@@ -515,7 +537,8 @@ typedef struct {
 } lis2du12_wake_up_src_t;
 
 #define LIS2DU12_TAP_SRC       0x22U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t z_tap         : 1;
   uint8_t y_tap         : 1;
@@ -538,7 +561,8 @@ typedef struct {
 } lis2du12_tap_src_t;
 
 #define LIS2DU12_SIXD_SRC      0x23U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t xl          : 1;
   uint8_t xh          : 1;
@@ -561,7 +585,8 @@ typedef struct {
 } lis2du12_sixd_src_t;
 
 #define LIS2DU12_ALL_INT_SRC   0x24U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t ff_ia_all       : 1;
   uint8_t wu_ia_all       : 1;
@@ -584,7 +609,8 @@ typedef struct {
 } lis2du12_all_int_src_t;
 
 #define LIS2DU12_STATUS        0x25U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t drdy        : 1;
   uint8_t pd_status   : 1;
@@ -597,7 +623,8 @@ typedef struct {
 } lis2du12_status_register_t;
 
 #define LIS2DU12_FIFO_STATUS1  0x26U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t not_used_01 : 6;
   uint8_t fifo_ovr    : 1;
@@ -610,7 +637,8 @@ typedef struct {
 } lis2du12_fifo_status1_t;
 
 #define LIS2DU12_FIFO_STATUS2  0x27U
-typedef struct {
+typedef struct
+{
   uint8_t fss    : 8;
 } lis2du12_fifo_status2_t;
 
@@ -627,7 +655,8 @@ typedef struct {
 #define LIS2DU12_WHO_AM_I      0x43U
 
 #define LIS2DU12_ST_SIGN       0x58U
-typedef struct {
+typedef struct
+{
 #if DRV_BYTE_ORDER == DRV_LITTLE_ENDIAN
   uint8_t not_used_01 : 5;
   uint8_t stsign      : 3;
@@ -650,7 +679,8 @@ typedef struct {
   *
   */
 
-typedef union{
+typedef union
+{
   lis2du12_if_pu_ctrl_t      if_pu_ctrl;
   lis2du12_if_ctrl_t         if_ctrl;
   lis2du12_ctrl1_t           ctrl1;
@@ -699,9 +729,9 @@ typedef union{
  * them with a custom implementation.
  */
 
-int32_t lis2du12_read_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
+int32_t lis2du12_read_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t *data,
                           uint16_t len);
-int32_t lis2du12_write_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t* data,
+int32_t lis2du12_write_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t *data,
                            uint16_t len);
 
 float_t lis2du12_from_fs2g_to_mg(int16_t lsb);
@@ -710,28 +740,32 @@ float_t lis2du12_from_fs8g_to_mg(int16_t lsb);
 float_t lis2du12_from_fs16g_to_mg(int16_t lsb);
 float_t lis2du12_from_lsb_to_celsius(int16_t lsb);
 
-typedef struct {
+typedef struct
+{
   uint8_t whoami;
 } lis2du12_id_t;
 int32_t lis2du12_id_get(const stmdev_ctx_t *ctx, lis2du12_id_t *val);
 
-typedef enum {
-    LIS2DU12_SEL_BY_HW   = 0x00, /* bus mode select by HW (SPI 3W disable) */
-    LIS2DU12_SPI_4W      = 0x03, /* Only SPI: SDO / SDI separated pins */
-    LIS2DU12_SPI_3W      = 0x07, /* Only SPI: SDO / SDI share the same pin */
-    LIS2DU12_I3C_DISABLE = 0x01, /* Select by HW (SPI 3W and I3C disable) */
+typedef enum
+{
+  LIS2DU12_SEL_BY_HW   = 0x00, /* bus mode select by HW (SPI 3W disable) */
+  LIS2DU12_SPI_4W      = 0x03, /* Only SPI: SDO / SDI separated pins */
+  LIS2DU12_SPI_3W      = 0x07, /* Only SPI: SDO / SDI share the same pin */
+  LIS2DU12_I3C_DISABLE = 0x01, /* Select by HW (SPI 3W and I3C disable) */
 } lis2du12_bus_mode_t;
 int32_t lis2du12_bus_mode_set(const stmdev_ctx_t *ctx, lis2du12_bus_mode_t val);
 int32_t lis2du12_bus_mode_get(const stmdev_ctx_t *ctx, lis2du12_bus_mode_t *val);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_DRV_RDY   = 0x00, /* Initialize the device for driver usage */
   LIS2DU12_BOOT      = 0x01, /* Restore calib. param. ( it takes 10ms ) */
   LIS2DU12_RESET     = 0x02, /* Reset configuration registers */
 } lis2du12_init_t;
 int32_t lis2du12_init_set(const stmdev_ctx_t *ctx, lis2du12_init_t val);
 
-typedef struct {
+typedef struct
+{
   uint8_t sw_reset           : 1; /* Restoring configuration registers */
   uint8_t boot               : 1; /* Restoring calibration parameters */
   uint8_t drdy_xl            : 1; /* Accelerometer data ready */
@@ -739,7 +773,8 @@ typedef struct {
 } lis2du12_status_t;
 int32_t lis2du12_status_get(const stmdev_ctx_t *ctx, lis2du12_status_t *val);
 
-typedef struct {
+typedef struct
+{
   uint8_t sdo_pull_up         : 1; /* 1 = pull up enable */
   uint8_t sda_pull_up         : 1; /* 1 = pull up enable */
   uint8_t cs_pull_up          : 1; /* 1 = pull up enable */
@@ -750,7 +785,8 @@ typedef struct {
 int32_t lis2du12_pin_conf_set(const stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val);
 int32_t lis2du12_pin_conf_get(const stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val);
 
-typedef struct {
+typedef struct
+{
   uint8_t free_fall        :  1; /* free fall event */
   uint8_t wake_up          :  1; /* wake up event */
   uint8_t wake_up_z        :  1; /* wake up on Z axis event */
@@ -775,7 +811,8 @@ typedef struct {
 int32_t lis2du12_all_sources_get(const stmdev_ctx_t *ctx,
                                  lis2du12_all_sources_t *val);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_OFF               = 0x00, /* in power down */
   LIS2DU12_1Hz6_ULP          = 0x01, /* @1Hz6(ultralow power) */
   LIS2DU12_3Hz_ULP           = 0x02, /* @3Hz (ultralow power) */
@@ -792,21 +829,24 @@ typedef enum {
   LIS2DU12_TRIG_SW           = 0x0F, /* Single-shot high latency by IF */
 } lis2du12_odr_t;
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_2g   = 0,
   LIS2DU12_4g   = 1,
   LIS2DU12_8g   = 2,
   LIS2DU12_16g  = 3,
 } lis2du12_fs_t;
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_ODR_div_2   = 0,
   LIS2DU12_ODR_div_4   = 1,
   LIS2DU12_ODR_div_8   = 2,
   LIS2DU12_ODR_div_16  = 3,
 } lis2du12_bw_t;
 
-typedef struct {
+typedef struct
+{
   lis2du12_odr_t odr;
   lis2du12_fs_t fs;
   lis2du12_bw_t bw;
@@ -816,20 +856,24 @@ int32_t lis2du12_mode_get(const stmdev_ctx_t *ctx, lis2du12_md_t *val);
 
 int32_t lis2du12_trigger_sw(const stmdev_ctx_t *ctx, lis2du12_md_t *val);
 
-typedef struct {
-  struct {
+typedef struct
+{
+  struct
+  {
     float_t mg[3];
     int16_t raw[3];
-  }xl;
-  struct {
+  } xl;
+  struct
+  {
     float_t deg_c;
     int16_t raw;
-  }heat;
+  } heat;
 } lis2du12_data_t;
 int32_t lis2du12_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
                           lis2du12_data_t *data);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_ST_DISABLE  = 0,
   LIS2DU12_ST_POSITIVE = 6,
   LIS2DU12_ST_NEGATIVE = 1,
@@ -838,7 +882,8 @@ int32_t lis2du12_self_test_sign_set(const stmdev_ctx_t *ctx, lis2du12_st_t val);
 int32_t lis2du12_self_test_start(const stmdev_ctx_t *ctx, uint8_t val); /* valid values: 1 or 2 */
 int32_t lis2du12_self_test_stop(const stmdev_ctx_t *ctx);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_BYPASS            = 0,
   LIS2DU12_FIFO              = 1,
   LIS2DU12_STREAM            = 6,
@@ -847,12 +892,14 @@ typedef enum {
   LIS2DU12_BYPASS_TO_FIFO    = 7, /* Bypass, FIFO on Trigger */
 } lis2du12_fifo_operation_t;
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_8_BIT    = 0,
   LIS2DU12_16_BIT   = 1,
 } lis2du12_fifo_store_t;
 
-typedef struct {
+typedef struct
+{
   lis2du12_fifo_operation_t operation;
   lis2du12_fifo_store_t store;
   uint8_t watermark; /* (0 disable) max 127 @16bit, even and max 256 @8bit.*/
@@ -860,7 +907,8 @@ typedef struct {
 int32_t lis2du12_fifo_mode_set(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val);
 int32_t lis2du12_fifo_mode_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val);
 
-typedef struct {
+typedef struct
+{
   uint8_t fifo_fth         : 1; /* 1 = fifo threshold event */
   uint8_t fifo_ovr         : 1; /* 1 = fifo overrun event */
 } lis2du12_fifo_status_t;
@@ -869,26 +917,31 @@ int32_t lis2du12_fifo_status_get(const stmdev_ctx_t *ctx, lis2du12_fifo_status_t
 int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *md,
                                 uint8_t *val);
 
-typedef struct {
-  struct {
+typedef struct
+{
+  struct
+  {
     float_t mg[3];
     int16_t raw[3];
-  }xl[2];
-  struct {
+  } xl[2];
+  struct
+  {
     float_t deg_c;
     int16_t raw;
-  }heat;
+  } heat;
 } lis2du12_fifo_data_t;
 int32_t lis2du12_fifo_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
                                lis2du12_fifo_md_t *fmd,
                                lis2du12_fifo_data_t *data);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_INT_LEVEL    = 0, /* active till event condition persist */
   LIS2DU12_INT_LATCHED  = 3, /* read ALL_INT_SRC for reset (API all_sources)*/
 } lis2du12_base_sig_t; /* base functions are: FF, WU(W2S), 4/6D, Tap */
 
-typedef struct {
+typedef struct
+{
   uint8_t enable       : 1; /* 1 = enabled / 0 = disabled */
   uint8_t active_low   : 1; /* 1 = active low / 0 = active high */
   uint8_t drdy_latched : 1; /* drdy returns to 0 after reading data */
@@ -899,7 +952,8 @@ int32_t lis2du12_interrupt_mode_set(const stmdev_ctx_t *ctx,
 int32_t lis2du12_interrupt_mode_get(const stmdev_ctx_t *ctx,
                                     lis2du12_int_mode_t *val);
 
-typedef struct {
+typedef struct
+{
   uint8_t drdy_xl       : 1; /* Accelerometer data ready */
   uint8_t boot          : 1; /* Restoring calibration parameters */
   uint8_t fifo_th       : 1; /* FIFO threshold reached */
@@ -923,20 +977,23 @@ int32_t lis2du12_pin_int2_route_set(const stmdev_ctx_t *ctx,
 int32_t lis2du12_pin_int2_route_get(const stmdev_ctx_t *ctx,
                                     lis2du12_pin_int_route_t *val);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_DO_NOT_CHANGE = 0,
   LIS2DU12_SLEEP_AT_6Hz  = 1,
   LIS2DU12_SLEEP_AT_3Hz  = 2,
   LIS2DU12_SLEEP_AT_1Hz6 = 3,
 } lis2du12_sleep_odr_t;
 
-typedef struct {
+typedef struct
+{
   uint8_t x_en  : 1; /* Detection on X-axis */
   uint8_t y_en  : 1; /* Detection on Y-axis */
   uint8_t z_en  : 1; /* Detection on Z-axis */
   uint8_t threshold; /* full scale dependent */
   uint8_t duration;  /* 1 LSb: 1 ODR_time */
-  struct {
+  struct
+  {
     uint8_t en  : 1; /* Enable sleep detection */
     uint8_t duration; /* 0 is 16 ODR_time, 1 LSB: 512 ODR_time. */
     lis2du12_sleep_odr_t odr;
@@ -945,7 +1002,8 @@ typedef struct {
 int32_t lis2du12_wake_up_mode_set(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val);
 int32_t lis2du12_wake_up_mode_get(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *val);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_XYZ = 0,
   LIS2DU12_YXZ = 1,
   LIS2DU12_XZY = 2,
@@ -954,11 +1012,13 @@ typedef enum {
   LIS2DU12_ZXY = 6,
 } lis2du12_priority_t;
 
-typedef struct {
+typedef struct
+{
   uint8_t x_en  : 1; /* Detection on X-axis */
   uint8_t y_en  : 1; /* Detection on Y-axis */
   uint8_t z_en  : 1; /* Detection on Z-axis */
-  struct {
+  struct
+  {
     uint8_t x;
     uint8_t y;
     uint8_t z;
@@ -966,7 +1026,8 @@ typedef struct {
   uint8_t shock; /* max shock time. 0 is 4 ODR_time, 1 LSb : 8 ODR_time. */
   uint8_t quiet; /* Time after a tap. 0 is 2 ODR_time, 1 LSB : 4 ODR_time.*/
   lis2du12_priority_t priority;
-  struct {
+  struct
+  {
     uint8_t en  : 1; /* Double tap detection */
     uint8_t latency; /* Max time gap. 0 is 16 ODR_time, 1 LSB : 32 ODR_time. */
   } tap_double;
@@ -974,7 +1035,8 @@ typedef struct {
 int32_t lis2du12_tap_mode_set(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val);
 int32_t lis2du12_tap_mode_get(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_156mg = 0,
   LIS2DU12_219mg = 1,
   LIS2DU12_250mg = 2,
@@ -985,26 +1047,30 @@ typedef enum {
   LIS2DU12_500mg = 7,
 } lis2du12_threshold_t;
 
-typedef struct {
+typedef struct
+{
   lis2du12_threshold_t threshold;
   uint8_t duration; /* 1 LSb: 1 ODR_time */
 } lis2du12_ff_md_t;
 int32_t lis2du12_free_fall_mode_set(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *val);
 int32_t lis2du12_free_fall_mode_get(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *val);
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_DEG_80 = 0,
   LIS2DU12_DEG_70 = 1,
   LIS2DU12_DEG_60 = 2,
   LIS2DU12_DEG_50 = 3,
 } lis2du12_orient_trshld_t;
 
-typedef enum {
+typedef enum
+{
   LIS2DU12_SIX  = 0,
   LIS2DU12_FOUR = 1,
 } lis2du12_deg_of_freedom_t;
 
-typedef struct {
+typedef struct
+{
   lis2du12_orient_trshld_t threshold;
   lis2du12_deg_of_freedom_t deg_of_freedom;
 } lis2du12_orient_md_t;
