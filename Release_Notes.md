@@ -117,13 +117,26 @@ This directory contains the LIS2DU12 component drivers.
 
 </div>
 
-<input type="checkbox" id="collapse-section8" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section8" aria-hidden="true">
 <label for="collapse-section8" aria-hidden="true">V2.0.1 / 20-Jun-2024</label>
 <div>
 
 ## Main changes
 
 - updated README.md file with tag reference and mdelay description
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section9" checked aria-hidden="true">
+<label for="collapse-section9" aria-hidden="true">V2.1.0 / 07-Jul-2025</label>
+<div>
+
+## Main changes
+
+- Fix driver formatting options
+- Added pointer to private data in stmdev_ctx_t
 
 ##
 
