@@ -1310,12 +1310,12 @@ int32_t lis2du12_wake_up_mode_set(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
 
   if (val->threshold > 63U)
   {
-    interrupt_cfg.wake_ths_w = PROPERTY_ENABLE;
+    interrupt_cfg.wake_ths_w = PROPERTY_DISABLE;
     wake_up_ths.wk_ths = val->threshold / 4U;
   }
   else
   {
-    interrupt_cfg.wake_ths_w = PROPERTY_DISABLE;
+    interrupt_cfg.wake_ths_w = PROPERTY_ENABLE;
     wake_up_ths.wk_ths = val->threshold;
   }
 
@@ -1379,7 +1379,7 @@ int32_t lis2du12_wake_up_mode_get(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
   val->y_en = ctrl1.wu_y_en;
   val->x_en = ctrl1.wu_x_en;
 
-  if (interrupt_cfg.wake_ths_w == PROPERTY_ENABLE)
+  if (interrupt_cfg.wake_ths_w == PROPERTY_DISABLE)
   {
     val->threshold = wake_up_ths.wk_ths * 4U;
   }
