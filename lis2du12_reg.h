@@ -992,7 +992,7 @@ typedef struct
   uint8_t x_en  : 1; /* Detection on X-axis */
   uint8_t y_en  : 1; /* Detection on Y-axis */
   uint8_t z_en  : 1; /* Detection on Z-axis */
-  uint8_t threshold; /* full scale dependent */
+  uint8_t threshold; /* 1 LSB = FS_XL / 2^8 */
   uint8_t duration;  /* 1 LSb: 1 ODR_time */
   struct
   {
