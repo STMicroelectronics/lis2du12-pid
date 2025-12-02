@@ -170,7 +170,10 @@ int32_t lis2du12_id_get(const stmdev_ctx_t *ctx, lis2du12_id_t *val)
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_WHO_AM_I, &reg, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->whoami = reg;
 
@@ -229,7 +232,10 @@ int32_t lis2du12_bus_mode_get(const stmdev_ctx_t *ctx, lis2du12_bus_mode_t *val)
   ret = lis2du12_read_reg(ctx, LIS2DU12_IF_CTRL, (uint8_t *)&if_ctrl, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch ((ctrl1.sim << 2) | (if_ctrl.i2c_disable) << 1 |
           (if_ctrl.i3c_disable))
@@ -265,7 +271,10 @@ int32_t lis2du12_init_set(const stmdev_ctx_t *ctx, lis2du12_init_t val)
   ret = lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch (val)
   {
@@ -313,7 +322,10 @@ int32_t lis2du12_status_get(const stmdev_ctx_t *ctx, lis2du12_status_t *val)
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->sw_reset = ctrl1.sw_reset;
   val->boot     = ctrl4.boot;
@@ -344,7 +356,10 @@ int32_t lis2du12_pin_conf_set(const stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val)
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_MD2_CFG, (uint8_t *)&md2_cfg, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   if_pu_ctrl.sdo_pu_disc = ~val->sdo_pull_up;
   if_pu_ctrl.sda_pu_en = val->sda_pull_up;
@@ -384,7 +399,10 @@ int32_t lis2du12_pin_conf_get(const stmdev_ctx_t *ctx, lis2du12_pin_conf_t *val)
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_MD2_CFG, (uint8_t *)&md2_cfg, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->sdo_pull_up = ~if_pu_ctrl.sdo_pu_disc;
   val->sda_pull_up = if_pu_ctrl.sda_pu_en;
@@ -486,7 +504,10 @@ int32_t lis2du12_mode_set(const stmdev_ctx_t *ctx, lis2du12_md_t *val)
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_CTRL5, (uint8_t *)&ctrl5, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   ctrl5.odr = (uint8_t)val->odr;
   ctrl5.fs = (uint8_t)val->fs;
@@ -512,7 +533,10 @@ int32_t lis2du12_mode_get(const stmdev_ctx_t *ctx, lis2du12_md_t *val)
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_CTRL5, (uint8_t *)&ctrl5, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch (ctrl5.odr)
   {
@@ -621,7 +645,10 @@ int32_t lis2du12_trigger_sw(const stmdev_ctx_t *ctx, lis2du12_md_t *md)
   {
     ret = lis2du12_read_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
 
-    if (ret != 0) { return ret; }
+    if (ret != 0)
+    {
+      return ret;
+    }
 
     ctrl4.soc = PROPERTY_ENABLE;
     ret = lis2du12_write_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
@@ -648,7 +675,10 @@ int32_t lis2du12_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_OUTX_L, (uint8_t *)&buff, 8);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   /* acceleration conversion */
   j = 0U;
@@ -726,7 +756,7 @@ int32_t lis2du12_self_test_start(const stmdev_ctx_t *ctx, uint8_t val)
   }
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_CTRL3, (uint8_t *)&ctrl3, 1);
-  
+
   if (ret == 0)
   {
     ctrl3.st = (uint8_t) val;
@@ -789,7 +819,10 @@ int32_t lis2du12_fifo_mode_set(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val)
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_FIFO_CTRL, reg, 2);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   bytecpy((uint8_t *)&fifo_ctrl, &reg[0]);
   bytecpy((uint8_t *)&fifo_wtm, &reg[1]);
@@ -833,7 +866,10 @@ int32_t lis2du12_fifo_mode_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val)
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_FIFO_CTRL, reg, 2);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   bytecpy((uint8_t *)&fifo_ctrl, &reg[0]);
   bytecpy((uint8_t *)&fifo_wtm, &reg[1]);
@@ -888,7 +924,10 @@ int32_t lis2du12_fifo_status_get(const stmdev_ctx_t *ctx, lis2du12_fifo_status_t
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_FIFO_STATUS1, (uint8_t *)&fifo_status1, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->fifo_fth = fifo_status1.fth;
   val->fifo_ovr = fifo_status1.fifo_ovr;
@@ -914,7 +953,10 @@ int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *md,
   ret = lis2du12_read_reg(ctx, LIS2DU12_FIFO_STATUS2,
                           (uint8_t *)&fifo_status2, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   *val = fifo_status2.fss;
 
@@ -941,7 +983,10 @@ int32_t lis2du12_fifo_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_OUTX_L, fifo_data, 8);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   if (fmd->store == LIS2DU12_8_BIT)
   {
@@ -1027,7 +1072,10 @@ int32_t lis2du12_interrupt_mode_set(const stmdev_ctx_t *ctx,
                           (uint8_t *)&interrupt_cfg, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   interrupt_cfg.int_short_en = (uint8_t)val->base_sig & 0x01U;
   interrupt_cfg.lir = ((uint8_t)val->base_sig & 0x02U) >> 1 ;
@@ -1038,7 +1086,7 @@ int32_t lis2du12_interrupt_mode_set(const stmdev_ctx_t *ctx,
   interrupt_cfg.interrupts_enable = val->enable;
 
   ret = lis2du12_write_reg(ctx, LIS2DU12_INTERRUPT_CFG,
-                            (uint8_t *)&interrupt_cfg, 1);
+                           (uint8_t *)&interrupt_cfg, 1);
   ret += lis2du12_write_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
 
   return ret;
@@ -1063,7 +1111,10 @@ int32_t lis2du12_interrupt_mode_get(const stmdev_ctx_t *ctx,
                           (uint8_t *)&interrupt_cfg, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->active_low = interrupt_cfg.h_lactive;
   val->drdy_latched = ~ctrl1.drdy_pulsed;
@@ -1105,7 +1156,10 @@ int32_t lis2du12_pin_int1_route_set(const stmdev_ctx_t *ctx,
   ret += lis2du12_read_reg(ctx, LIS2DU12_MD1_CFG, (uint8_t *)&md1_cfg, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL2, (uint8_t *)&ctrl2, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   ctrl2.int1_boot = val->boot;
   ctrl2.int1_drdy = val->drdy_xl;
@@ -1131,7 +1185,7 @@ int32_t lis2du12_pin_int1_route_set(const stmdev_ctx_t *ctx,
   }
 
   ret = lis2du12_write_reg(ctx, LIS2DU12_INTERRUPT_CFG,
-                            (uint8_t *)&interrupt_cfg, 1);
+                           (uint8_t *)&interrupt_cfg, 1);
   ret += lis2du12_write_reg(ctx, LIS2DU12_MD1_CFG, (uint8_t *)&md1_cfg, 1);
   ret += lis2du12_write_reg(ctx, LIS2DU12_CTRL2, (uint8_t *)&ctrl2, 1);
 
@@ -1159,7 +1213,10 @@ int32_t lis2du12_pin_int1_route_get(const stmdev_ctx_t *ctx,
   ret += lis2du12_read_reg(ctx, LIS2DU12_MD1_CFG, (uint8_t *)&md1_cfg, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL2, (uint8_t *)&ctrl2, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->boot = ctrl2.int1_boot;
   val->drdy_xl = ctrl2.int1_drdy;
@@ -1208,7 +1265,10 @@ int32_t lis2du12_pin_int2_route_set(const stmdev_ctx_t *ctx,
   ret += lis2du12_read_reg(ctx, LIS2DU12_MD2_CFG, (uint8_t *)&md2_cfg, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL3, (uint8_t *)&ctrl3, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   ctrl3.int2_boot = val->boot;
   ctrl3.int2_drdy = val->drdy_xl;
@@ -1262,7 +1322,10 @@ int32_t lis2du12_pin_int2_route_get(const stmdev_ctx_t *ctx,
   ret += lis2du12_read_reg(ctx, LIS2DU12_MD2_CFG, (uint8_t *)&md2_cfg, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL3, (uint8_t *)&ctrl3, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->boot = ctrl3.int2_boot;
   val->drdy_xl = ctrl3.int2_drdy;
@@ -1331,7 +1394,10 @@ int32_t lis2du12_wake_up_mode_set(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   ctrl1.wu_z_en = val->z_en;
   ctrl1.wu_y_en = val->y_en;
@@ -1348,10 +1414,10 @@ int32_t lis2du12_wake_up_mode_set(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
     wake_up_ths.wk_ths = val->threshold;
   }
 
-  if (val->duration > 3U)
+  if (val->duration & 0x10U)
   {
     md1_cfg.wu_dur_x4 = PROPERTY_ENABLE;
-    wake_up_dur.wake_dur = val->duration / 4U;
+    wake_up_dur.wake_dur = val->duration & 0xF;
   }
   else
   {
@@ -1404,7 +1470,10 @@ int32_t lis2du12_wake_up_mode_get(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL1, (uint8_t *)&ctrl1, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_CTRL4, (uint8_t *)&ctrl4, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->z_en = ctrl1.wu_z_en;
   val->y_en = ctrl1.wu_y_en;
@@ -1419,13 +1488,28 @@ int32_t lis2du12_wake_up_mode_get(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
     val->threshold = wake_up_ths.wk_ths;
   }
 
-  if (md1_cfg.wu_dur_x4 == PROPERTY_ENABLE)
+  switch (wake_up_dur.wake_dur)
   {
-    val->duration = wake_up_dur.wake_dur * 4U;
-  }
-  else
-  {
-    val->duration = wake_up_dur.wake_dur;
+    case 0:
+      val->duration = (md1_cfg.wu_dur_x4 == PROPERTY_ENABLE) ? LIS2DU12_WAKE_DUR_3_ODR :
+                      LIS2DU12_WAKE_DUR_0_ODR;
+      break;
+    case 1:
+      val->duration = (md1_cfg.wu_dur_x4 == PROPERTY_ENABLE) ? LIS2DU12_WAKE_DUR_7_ODR :
+                      LIS2DU12_WAKE_DUR_1_ODR;
+      break;
+    case 2:
+      val->duration = (md1_cfg.wu_dur_x4 == PROPERTY_ENABLE) ? LIS2DU12_WAKE_DUR_11_ODR :
+                      LIS2DU12_WAKE_DUR_2_ODR;
+      break;
+    case 3:
+      val->duration = (md1_cfg.wu_dur_x4 == PROPERTY_ENABLE) ? LIS2DU12_WAKE_DUR_15_ODR :
+                      LIS2DU12_WAKE_DUR_3_ODR;
+      break;
+    default:
+      val->duration = (md1_cfg.wu_dur_x4 == PROPERTY_ENABLE) ? LIS2DU12_WAKE_DUR_3_ODR :
+                      LIS2DU12_WAKE_DUR_0_ODR;
+      break;
   }
 
   val->sleep.en = wake_up_ths.sleep_on;
@@ -1490,7 +1574,10 @@ int32_t lis2du12_tap_mode_set(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val)
   ret += lis2du12_read_reg(ctx, LIS2DU12_TAP_THS_Z, (uint8_t *)&tap_ths_z, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_INT_DUR, (uint8_t *)&int_dur, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   tap_ths_z.tap_z_en = val->z_en;
   tap_ths_z.tap_y_en = val->y_en;
@@ -1542,7 +1629,10 @@ int32_t lis2du12_tap_mode_get(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val)
   ret += lis2du12_read_reg(ctx, LIS2DU12_TAP_THS_Z, (uint8_t *)&tap_ths_z, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_INT_DUR, (uint8_t *)&int_dur, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->z_en = tap_ths_z.tap_z_en;
   val->y_en = tap_ths_z.tap_y_en;
@@ -1617,7 +1707,10 @@ int32_t lis2du12_free_fall_mode_set(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *v
                           (uint8_t *)&wake_up_dur, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_FREE_FALL, (uint8_t *)&free_fall, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   wake_up_dur.ff_dur = val->duration & 0x1FU;
   free_fall.ff_dur = (val->duration) & 0x20U >> 5;
@@ -1649,7 +1742,10 @@ int32_t lis2du12_free_fall_mode_get(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *v
                           (uint8_t *)&wake_up_dur, 1);
   ret += lis2du12_read_reg(ctx, LIS2DU12_FREE_FALL, (uint8_t *)&free_fall, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   val->duration = (free_fall.ff_dur * 32U) + wake_up_dur.ff_dur;
 
@@ -1716,7 +1812,10 @@ int32_t lis2du12_orientation_mode_set(const stmdev_ctx_t *ctx,
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_TAP_THS_X, (uint8_t *)&tap_ths_x, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   tap_ths_x.d6d_ths = (uint8_t)val->threshold;
   tap_ths_x.d4d_en = (uint8_t)val->deg_of_freedom;
@@ -1742,7 +1841,10 @@ int32_t lis2du12_orientation_mode_get(const stmdev_ctx_t *ctx,
 
   ret = lis2du12_read_reg(ctx, LIS2DU12_TAP_THS_X, (uint8_t *)&tap_ths_x, 1);
 
-  if (ret != 0) { return ret; }
+  if (ret != 0)
+  {
+    return ret;
+  }
 
   switch (tap_ths_x.d6d_ths)
   {
