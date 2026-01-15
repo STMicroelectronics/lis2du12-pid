@@ -142,7 +142,7 @@ This directory contains the LIS2DU12 component drivers.
 
 </div>
 
-<input type="checkbox" id="collapse-section10" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section10" aria-hidden="true">
 <label for="collapse-section10" aria-hidden="true">V2.2.0 / 07-Oct-2025</label>
 <div>
 
@@ -152,6 +152,18 @@ This directory contains the LIS2DU12 component drivers.
 - clarify wake-up threshold comment
 - fix threshold handling in wake_up_mode_set() and wake_up_mode_get()
 - Adding CODE_OF_CONDUCT.md and SECURITY.md
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section11" checked aria-hidden="true">
+<label for="collapse-section11" aria-hidden="true">V3.0.0 / 15-Jan-2026</label>
+<div>
+
+## Main changes
+
+- Align driver to DS rev7
 
 ##
 
