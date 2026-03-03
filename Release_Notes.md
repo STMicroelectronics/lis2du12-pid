@@ -30,100 +30,27 @@ This directory contains the LIS2DU12 component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section1" aria-hidden="true">
-<label for="collapse-section1" aria-hidden="true">V1.0.0 / 14-November-2022</label>
+<input type="checkbox" id="collapse-section11" checked aria-hidden="true">
+<label for="collapse-section11" aria-hidden="true">V3.0.0 / 15-Jan-2026</label>
 <div>
 
 ## Main changes
 
-### First release
-
-- First official release [ref. DS v2.0]
+- Align driver to DS rev7
 
 ##
 
 </div>
-
-<input type="checkbox" id="collapse-section2" aria-hidden="true">
-<label for="collapse-section2" aria-hidden="true">V1.1.0 / 01-June-2023</label>
+<input type="checkbox" id="collapse-section10" aria-hidden="true">
+<label for="collapse-section10" aria-hidden="true">V2.2.0 / 07-Oct-2025</label>
 <div>
 
 ## Main changes
 
-- Add __weak directive to read/write registers routines
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section3" aria-hidden="true">
-<label for="collapse-section3" aria-hidden="true">V1.1.1 / 07-June-2023</label>
-<div>
-
-## Main changes
-
-- Fix bug in wake_up_mode_set() API
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section4" aria-hidden="true">
-<label for="collapse-section4" aria-hidden="true">V1.1.2 / 28-June-2023</label>
-<div>
-
-## Main changes
-
-- Fix typos in ODR define names and comments
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section5" aria-hidden="true">
-<label for="collapse-section5" aria-hidden="true">V1.1.3 / 24-July-2023</label>
-<div>
-
-## Main changes
-
-- Fix typo (x_wu vs z_wu field)
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section6" aria-hidden="true">
-<label for="collapse-section6" aria-hidden="true">V1.2.0 / 09-Nov-2023</label>
-<div>
-
-## Main changes
-
-- moved all enum outside of struct to be C++ compliant
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section7" aria-hidden="true">
-<label for="collapse-section7" aria-hidden="true">V2.0.0 / 20-Mar-2024</label>
-<div>
-
-## Main changes
-
-- Fixed code style (Artistic Style Version 3.4.13)
-- Add "const" to ctx arg for all APIs
-
-##
-
-</div>
-
-<input type="checkbox" id="collapse-section8" aria-hidden="true">
-<label for="collapse-section8" aria-hidden="true">V2.0.1 / 20-Jun-2024</label>
-<div>
-
-## Main changes
-
-- updated README.md file with tag reference and mdelay description
+- Added checks to avoid write random content on pointers and regs
+- clarify wake-up threshold comment
+- fix threshold handling in wake_up_mode_set() and wake_up_mode_get()
+- Adding CODE_OF_CONDUCT.md and SECURITY.md
 
 ##
 
@@ -142,32 +69,105 @@ This directory contains the LIS2DU12 component drivers.
 
 </div>
 
-<input type="checkbox" id="collapse-section10" aria-hidden="true">
-<label for="collapse-section10" aria-hidden="true">V2.2.0 / 07-Oct-2025</label>
+<input type="checkbox" id="collapse-section8" aria-hidden="true">
+<label for="collapse-section8" aria-hidden="true">V2.0.1 / 20-Jun-2024</label>
 <div>
 
 ## Main changes
 
-- Added checks to avoid write random content on pointers and regs
-- clarify wake-up threshold comment
-- fix threshold handling in wake_up_mode_set() and wake_up_mode_get()
-- Adding CODE_OF_CONDUCT.md and SECURITY.md
+- updated README.md file with tag reference and mdelay description
 
 ##
 
 </div>
 
-<input type="checkbox" id="collapse-section11" checked aria-hidden="true">
-<label for="collapse-section11" aria-hidden="true">V3.0.0 / 15-Jan-2026</label>
+<input type="checkbox" id="collapse-section7" aria-hidden="true">
+<label for="collapse-section7" aria-hidden="true">V2.0.0 / 20-Mar-2024</label>
 <div>
 
 ## Main changes
 
-- Align driver to DS rev7
+- Fixed code style (Artistic Style Version 3.4.13)
+- Add "const" to ctx arg for all APIs
 
 ##
 
 </div>
+
+<input type="checkbox" id="collapse-section6" aria-hidden="true">
+<label for="collapse-section6" aria-hidden="true">V1.2.0 / 09-Nov-2023</label>
+<div>
+
+## Main changes
+
+- moved all enum outside of struct to be C++ compliant
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section5" aria-hidden="true">
+<label for="collapse-section5" aria-hidden="true">V1.1.3 / 24-July-2023</label>
+<div>
+
+## Main changes
+
+- Fix typo (x_wu vs z_wu field)
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section4" aria-hidden="true">
+<label for="collapse-section4" aria-hidden="true">V1.1.2 / 28-June-2023</label>
+<div>
+
+## Main changes
+
+- Fix typos in ODR define names and comments
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section3" aria-hidden="true">
+<label for="collapse-section3" aria-hidden="true">V1.1.1 / 07-June-2023</label>
+<div>
+
+## Main changes
+
+- Fix bug in wake_up_mode_set() API
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section2" aria-hidden="true">
+<label for="collapse-section2" aria-hidden="true">V1.1.0 / 01-June-2023</label>
+<div>
+
+## Main changes
+
+- Add __weak directive to read/write registers routines
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section1" aria-hidden="true">
+<label for="collapse-section1" aria-hidden="true">V1.0.0 / 14-November-2022</label>
+<div>
+
+## Main changes
+
+### First release
+
+- First official release [ref. DS v2.0]
+
+##
+
+</div>
+
 :::
 
 
