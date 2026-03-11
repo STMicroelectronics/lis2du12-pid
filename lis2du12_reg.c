@@ -240,11 +240,17 @@ int32_t lis2du12_bus_mode_get(const stmdev_ctx_t *ctx, lis2du12_bus_mode_t *val)
   switch ((ctrl1.sim << 2) | (if_ctrl.i2c_disable) << 1 |
           (if_ctrl.i3c_disable))
   {
-    case LIS2DU12_SEL_BY_HW:
+    case 0x00:
       *val = LIS2DU12_SEL_BY_HW;
       break;
-    case LIS2DU12_SPI_3W:
+    case 0x03:
+      *val = LIS2DU12_SPI_4W;
+      break;
+    case 0x07:
       *val = LIS2DU12_SPI_3W;
+      break;
+    case 0x01:
+      *val = LIS2DU12_I3C_DISABLE;
       break;
     default:
       *val = LIS2DU12_SEL_BY_HW;
@@ -540,46 +546,46 @@ int32_t lis2du12_mode_get(const stmdev_ctx_t *ctx, lis2du12_md_t *val)
 
   switch (ctrl5.odr)
   {
-    case LIS2DU12_OFF:
+    case 0x00:
       val->odr = LIS2DU12_OFF;
       break;
-    case LIS2DU12_1Hz6_ULP:
+    case 0x01:
       val->odr = LIS2DU12_1Hz6_ULP;
       break;
-    case LIS2DU12_3Hz_ULP:
+    case 0x02:
       val->odr = LIS2DU12_3Hz_ULP;
       break;
-    case LIS2DU12_6Hz_ULP:
+    case 0x03:
       val->odr = LIS2DU12_6Hz_ULP;
       break;
-    case LIS2DU12_6Hz:
+    case 0x04:
       val->odr = LIS2DU12_6Hz;
       break;
-    case LIS2DU12_12Hz5:
+    case 0x05:
       val->odr = LIS2DU12_12Hz5;
       break;
-    case LIS2DU12_25Hz:
+    case 0x06:
       val->odr = LIS2DU12_25Hz;
       break;
-    case LIS2DU12_50Hz:
+    case 0x07:
       val->odr = LIS2DU12_50Hz;
       break;
-    case LIS2DU12_100Hz:
+    case 0x08:
       val->odr = LIS2DU12_100Hz;
       break;
-    case LIS2DU12_200Hz:
+    case 0x09:
       val->odr = LIS2DU12_200Hz;
       break;
-    case LIS2DU12_400Hz:
+    case 0x0A:
       val->odr = LIS2DU12_400Hz;
       break;
-    case LIS2DU12_800Hz:
+    case 0x0B:
       val->odr = LIS2DU12_800Hz;
       break;
-    case LIS2DU12_TRIG_PIN:
+    case 0x0E:
       val->odr = LIS2DU12_TRIG_PIN;
       break;
-    case LIS2DU12_TRIG_SW:
+    case 0x0F:
       val->odr = LIS2DU12_TRIG_SW;
       break;
     default:
@@ -589,16 +595,16 @@ int32_t lis2du12_mode_get(const stmdev_ctx_t *ctx, lis2du12_md_t *val)
 
   switch (ctrl5.fs)
   {
-    case LIS2DU12_2g:
+    case 0x00:
       val->fs = LIS2DU12_2g;
       break;
-    case LIS2DU12_4g:
+    case 0x01:
       val->fs = LIS2DU12_4g;
       break;
-    case LIS2DU12_8g:
+    case 0x02:
       val->fs = LIS2DU12_8g;
       break;
-    case LIS2DU12_16g:
+    case 0x03:
       val->fs = LIS2DU12_16g;
       break;
     default:
@@ -608,16 +614,16 @@ int32_t lis2du12_mode_get(const stmdev_ctx_t *ctx, lis2du12_md_t *val)
 
   switch (ctrl5.bw)
   {
-    case LIS2DU12_ODR_div_2:
+    case 0x00:
       val->bw = LIS2DU12_ODR_div_2;
       break;
-    case LIS2DU12_ODR_div_4:
+    case 0x01:
       val->bw = LIS2DU12_ODR_div_4;
       break;
-    case LIS2DU12_ODR_div_8:
+    case 0x02:
       val->bw = LIS2DU12_ODR_div_8;
       break;
-    case LIS2DU12_ODR_div_16:
+    case 0x03:
       val->bw = LIS2DU12_ODR_div_16;
       break;
     default:
@@ -876,22 +882,22 @@ int32_t lis2du12_fifo_mode_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val)
 
   switch (fifo_ctrl.f_mode)
   {
-    case LIS2DU12_BYPASS:
+    case 0x00:
       val->operation = LIS2DU12_BYPASS;
       break;
-    case LIS2DU12_FIFO:
+    case 0x01:
       val->operation = LIS2DU12_FIFO;
       break;
-    case LIS2DU12_STREAM:
+    case 0x06:
       val->operation = LIS2DU12_STREAM;
       break;
-    case LIS2DU12_STREAM_TO_FIFO:
+    case 0x03:
       val->operation = LIS2DU12_STREAM_TO_FIFO;
       break;
-    case LIS2DU12_BYPASS_TO_STREAM:
+    case 0x04:
       val->operation = LIS2DU12_BYPASS_TO_STREAM;
       break;
-    case LIS2DU12_BYPASS_TO_FIFO:
+    case 0x07:
       val->operation = LIS2DU12_BYPASS_TO_FIFO;
       break;
     default:
@@ -901,10 +907,10 @@ int32_t lis2du12_fifo_mode_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val)
 
   switch (fifo_ctrl.fifo_depth)
   {
-    case LIS2DU12_16_BIT:
+    case 0x01:
       val->store = LIS2DU12_16_BIT;
       break;
-    case LIS2DU12_8_BIT:
+    case 0x00:
       val->store = LIS2DU12_8_BIT;
       break;
     default:
@@ -1122,10 +1128,10 @@ int32_t lis2du12_interrupt_mode_get(const stmdev_ctx_t *ctx,
 
   switch ((interrupt_cfg.lir << 1) | interrupt_cfg.int_short_en)
   {
-    case LIS2DU12_INT_LEVEL:
+    case 0x00:
       val->base_sig = LIS2DU12_INT_LEVEL;
       break;
-    case LIS2DU12_INT_LATCHED:
+    case 0x03:
       val->base_sig = LIS2DU12_INT_LATCHED;
       break;
     default:
@@ -1517,16 +1523,16 @@ int32_t lis2du12_wake_up_mode_get(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
 
   switch (ctrl4.inact_odr)
   {
-    case LIS2DU12_DO_NOT_CHANGE:
+    case 0x00:
       val->sleep.odr = LIS2DU12_DO_NOT_CHANGE;
       break;
-    case LIS2DU12_SLEEP_AT_6Hz:
+    case 0x03:
       val->sleep.odr = LIS2DU12_SLEEP_AT_6Hz;
       break;
-    case LIS2DU12_SLEEP_AT_3Hz:
+    case 0x02:
       val->sleep.odr = LIS2DU12_SLEEP_AT_3Hz;
       break;
-    case LIS2DU12_SLEEP_AT_1Hz6:
+    case 0x01:
       val->sleep.odr = LIS2DU12_SLEEP_AT_1Hz6;
       break;
     default:
@@ -1647,23 +1653,29 @@ int32_t lis2du12_tap_mode_get(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val)
 
   switch (tap_ths_y.tap_priority)
   {
-    case LIS2DU12_XYZ:
+    case 0x00:
       val->priority = LIS2DU12_XYZ;
       break;
-    case LIS2DU12_YXZ:
+    case 0x01:
       val->priority = LIS2DU12_YXZ;
       break;
-    case LIS2DU12_XZY:
+    case 0x02:
       val->priority = LIS2DU12_XZY;
       break;
-    case LIS2DU12_ZYX:
+    case 0x03:
       val->priority = LIS2DU12_ZYX;
       break;
-    case LIS2DU12_YZX:
+    case 0x04:
+      val->priority = LIS2DU12_XYZ;
+      break;
+    case 0x05:
       val->priority = LIS2DU12_YZX;
       break;
-    case LIS2DU12_ZXY:
+    case 0x06:
       val->priority = LIS2DU12_ZXY;
+      break;
+    case 0x07:
+      val->priority = LIS2DU12_ZYX;
       break;
     default:
       val->priority = LIS2DU12_XYZ;
@@ -1751,28 +1763,28 @@ int32_t lis2du12_free_fall_mode_get(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *v
 
   switch (free_fall.ff_ths)
   {
-    case LIS2DU12_156mg:
+    case 0x00:
       val->threshold = LIS2DU12_156mg;
       break;
-    case LIS2DU12_219mg:
+    case 0x01:
       val->threshold = LIS2DU12_219mg;
       break;
-    case LIS2DU12_250mg:
+    case 0x02:
       val->threshold = LIS2DU12_250mg;
       break;
-    case LIS2DU12_312mg:
+    case 0x03:
       val->threshold = LIS2DU12_312mg;
       break;
-    case LIS2DU12_344mg:
+    case 0x04:
       val->threshold = LIS2DU12_344mg;
       break;
-    case LIS2DU12_406mg:
+    case 0x05:
       val->threshold = LIS2DU12_406mg;
       break;
-    case LIS2DU12_469mg:
+    case 0x06:
       val->threshold = LIS2DU12_469mg;
       break;
-    case LIS2DU12_500mg:
+    case 0x07:
       val->threshold = LIS2DU12_500mg;
       break;
     default:
@@ -1848,16 +1860,16 @@ int32_t lis2du12_orientation_mode_get(const stmdev_ctx_t *ctx,
 
   switch (tap_ths_x.d6d_ths)
   {
-    case LIS2DU12_DEG_80:
+    case 0x00:
       val->threshold = LIS2DU12_DEG_80;
       break;
-    case LIS2DU12_DEG_70:
+    case 0x01:
       val->threshold = LIS2DU12_DEG_70;
       break;
-    case LIS2DU12_DEG_60:
+    case 0x02:
       val->threshold = LIS2DU12_DEG_60;
       break;
-    case LIS2DU12_DEG_50:
+    case 0x03:
       val->threshold = LIS2DU12_DEG_50;
       break;
     default:
@@ -1867,10 +1879,10 @@ int32_t lis2du12_orientation_mode_get(const stmdev_ctx_t *ctx,
 
   switch (tap_ths_x.d4d_en)
   {
-    case LIS2DU12_SIX:
+    case 0x00:
       val->deg_of_freedom = LIS2DU12_SIX;
       break;
-    case LIS2DU12_FOUR:
+    case 0x01:
       val->deg_of_freedom = LIS2DU12_FOUR;
       break;
     default:
