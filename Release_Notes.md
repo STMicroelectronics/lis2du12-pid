@@ -30,7 +30,19 @@ This directory contains the LIS2DU12 component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section11" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section12" checked aria-hidden="true">
+<label for="collapse-section12" aria-hidden="true">V3.0.1 / 18-Mar-2026</label>
+<div>
+
+## Main changes
+
+- Change switch cases to use hex values
+- Re-order update history (most updated on top)
+
+##
+
+</div>
+<input type="checkbox" id="collapse-section11" aria-hidden="true">
 <label for="collapse-section11" aria-hidden="true">V3.0.0 / 15-Jan-2026</label>
 <div>
 
