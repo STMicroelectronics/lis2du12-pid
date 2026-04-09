@@ -1724,10 +1724,10 @@ int32_t lis2du12_free_fall_mode_set(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *v
     return ret;
   }
 
-  wake_up_dur.ff_dur = val->duration & 0x1FU;
-  free_fall.ff_dur = (val->duration) & 0x20U >> 5;
+  free_fall.ff_dur = val->duration & 0x1FU;
+  wake_up_dur.ff_dur = (val->duration) & 0x20U >> 5;
 
-  free_fall.ff_ths = (uint8_t)val->threshold;
+  free_fall.ff_ths = (uint8_t)val->threshold & 0x07U;
 
   ret += lis2du12_write_reg(ctx, LIS2DU12_WAKE_UP_DUR,
                             (uint8_t *)&wake_up_dur, 1);
@@ -1759,7 +1759,7 @@ int32_t lis2du12_free_fall_mode_get(const stmdev_ctx_t *ctx, lis2du12_ff_md_t *v
     return ret;
   }
 
-  val->duration = (free_fall.ff_dur * 32U) + wake_up_dur.ff_dur;
+  val->duration = (uint8_t)((wake_up_dur.ff_dur * 32U) + free_fall.ff_dur);
 
   switch (free_fall.ff_ths)
   {
