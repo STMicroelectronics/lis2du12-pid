@@ -515,9 +515,9 @@ int32_t lis2du12_mode_set(const stmdev_ctx_t *ctx, lis2du12_md_t *val)
     return ret;
   }
 
-  ctrl5.odr = (uint8_t)val->odr;
-  ctrl5.fs = (uint8_t)val->fs;
-  ctrl5.bw = (uint8_t)val->bw;
+  ctrl5.odr = (uint8_t)val->odr & 0x0FU;
+  ctrl5.fs = (uint8_t)val->fs & 0x03U;
+  ctrl5.bw = (uint8_t)val->bw & 0x03U;
 
   ret += lis2du12_write_reg(ctx, LIS2DU12_CTRL5, (uint8_t *)&ctrl5, 1);
 
@@ -690,8 +690,7 @@ int32_t lis2du12_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
   j = 0U;
   for (i = 0U; i < 3U; i++)
   {
-    data->xl.raw[i] = (int16_t)buff[j + 1U];
-    data->xl.raw[i] = (data->xl.raw[i] * 256) + (int16_t) buff[j];
+    data->xl.raw[i] = (int16_t)(buff[j] | ((uint16_t)buff[j + 1U] << 8));
     j += 2U;
     switch (md->fs)
     {
@@ -713,8 +712,8 @@ int32_t lis2du12_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
     }
   }
 
-  data->heat.raw = (int16_t)buff[j + 1U];
-  data->heat.raw = (data->heat.raw * 256) + (int16_t) buff[j];
+  data->heat.raw = (int16_t)(buff[j] | ((uint16_t)buff[j + 1U] << 8));
+
   /* temperature conversion */
   data->heat.deg_c = lis2du12_from_lsb_to_celsius(data->heat.raw);
 
@@ -737,7 +736,7 @@ int32_t lis2du12_self_test_sign_set(const stmdev_ctx_t *ctx, lis2du12_st_t val)
   ret = lis2du12_read_reg(ctx, LIS2DU12_ST_SIGN, (uint8_t *)&st_sign, 1);
   if (ret == 0)
   {
-    st_sign.stsign = (uint8_t) val;
+    st_sign.stsign = (uint8_t) val & 0x07U;
     ret = lis2du12_write_reg(ctx, LIS2DU12_ST_SIGN, (uint8_t *)&st_sign, 1);
   }
   return ret;
@@ -765,7 +764,7 @@ int32_t lis2du12_self_test_start(const stmdev_ctx_t *ctx, uint8_t val)
 
   if (ret == 0)
   {
-    ctrl3.st = (uint8_t) val;
+    ctrl3.st = (uint8_t) val & 0x03U;
     ret = lis2du12_write_reg(ctx, LIS2DU12_CTRL3, (uint8_t *)&ctrl3, 1);
   }
 
@@ -833,8 +832,8 @@ int32_t lis2du12_fifo_mode_set(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val)
   bytecpy((uint8_t *)&fifo_ctrl, &reg[0]);
   bytecpy((uint8_t *)&fifo_wtm, &reg[1]);
 
-  fifo_ctrl.f_mode = (uint8_t) val->operation;
-  fifo_ctrl.fifo_depth = (uint8_t) val->store;
+  fifo_ctrl.f_mode = (uint8_t) val->operation & 0x07U;
+  fifo_ctrl.fifo_depth = (uint8_t) val->store & 0x01U;
 
   if (val->watermark != 0x00U)
   {
@@ -845,7 +844,7 @@ int32_t lis2du12_fifo_mode_set(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *val)
     fifo_ctrl.stop_on_fth = PROPERTY_DISABLE;
   }
 
-  fifo_wtm.fth = val->watermark;
+  fifo_wtm.fth = val->watermark & 0x7FU;
 
   bytecpy(&reg[0], (uint8_t *)&fifo_ctrl);
   bytecpy(&reg[1], (uint8_t *)&fifo_wtm);
@@ -998,12 +997,11 @@ int32_t lis2du12_fifo_data_get(const stmdev_ctx_t *ctx, lis2du12_md_t *md,
   {
     for (i = 0; i < 3; i++)
     {
-      data->xl[0].raw[i] = (int16_t)fifo_data[2 * i + 1];
-      data->xl[0].raw[i] = data->xl[0].raw[i] * 256 + (int16_t)fifo_data[2 * i];
+      data->xl[0].raw[i] = (int16_t)(fifo_data[2 * i]
+                                     | ((uint16_t)fifo_data[2 * i + 1] << 8));
     }
 
-    data->heat.raw = (int16_t)fifo_data[7U];
-    data->heat.raw = (data->heat.raw * 256) + (int16_t) fifo_data[6U];
+    data->heat.raw = (int16_t)(fifo_data[6U] | (uint16_t)(fifo_data[7U] << 8));
     /* temperature conversion */
     data->heat.deg_c = lis2du12_from_lsb_to_celsius(data->heat.raw);
   }
@@ -1412,28 +1410,28 @@ int32_t lis2du12_wake_up_mode_set(const stmdev_ctx_t *ctx, lis2du12_wkup_md_t *v
   if (val->threshold > 63U)
   {
     interrupt_cfg.wake_ths_w = PROPERTY_DISABLE;
-    wake_up_ths.wk_ths = val->threshold / 4U;
+    wake_up_ths.wk_ths = (val->threshold / 4U) & 0x3FU;
   }
   else
   {
     interrupt_cfg.wake_ths_w = PROPERTY_ENABLE;
-    wake_up_ths.wk_ths = val->threshold;
+    wake_up_ths.wk_ths = val->threshold & 0x3FU;
   }
 
   if (val->duration & 0x10U)
   {
     md1_cfg.wu_dur_x4 = PROPERTY_ENABLE;
-    wake_up_dur.wake_dur = val->duration & 0xF;
+    wake_up_dur.wake_dur = val->duration & 0x3U;
   }
   else
   {
     md1_cfg.wu_dur_x4 = PROPERTY_DISABLE;
-    wake_up_dur.wake_dur = val->duration;
+    wake_up_dur.wake_dur = val->duration & 0x03U;
   }
 
-  wake_up_ths.sleep_on = val->sleep.en;
-  ctrl4.inact_odr = (uint8_t)val->sleep.odr;
-  wake_up_dur.sleep_dur = val->sleep.duration;
+  wake_up_ths.sleep_on = val->sleep.en & 0x01U;
+  ctrl4.inact_odr = (uint8_t)val->sleep.odr & 0x03U;
+  wake_up_dur.sleep_dur = val->sleep.duration & 0x0FU;
 
   ret += lis2du12_write_reg(ctx, LIS2DU12_INTERRUPT_CFG,
                             (uint8_t *)&interrupt_cfg, 1);
@@ -1585,21 +1583,21 @@ int32_t lis2du12_tap_mode_set(const stmdev_ctx_t *ctx, lis2du12_tap_md_t *val)
     return ret;
   }
 
-  tap_ths_z.tap_z_en = val->z_en;
-  tap_ths_z.tap_y_en = val->y_en;
-  tap_ths_z.tap_x_en = val->x_en;
+  tap_ths_z.tap_z_en = val->z_en & 0x01U;
+  tap_ths_z.tap_y_en = val->y_en & 0x01U;
+  tap_ths_z.tap_x_en = val->x_en & 0x01U;
 
-  tap_ths_x.tap_ths_x = val->threshold.x;
-  tap_ths_y.tap_ths_y = val->threshold.y;
-  tap_ths_z.tap_ths_z = val->threshold.z;
+  tap_ths_x.tap_ths_x = val->threshold.x & 0x1FU;
+  tap_ths_y.tap_ths_y = val->threshold.y & 0x1FU;
+  tap_ths_z.tap_ths_z = val->threshold.z & 0x1FU;
 
-  int_dur.shock = val->shock;
-  int_dur.quiet = val->quiet;
+  int_dur.shock = val->shock & 0x03U;
+  int_dur.quiet = val->quiet & 0x03U;
 
-  tap_ths_y.tap_priority = (uint8_t)val->priority;
+  tap_ths_y.tap_priority = (uint8_t)val->priority & 0x07U;
 
-  wake_up_ths.single_double_tap = val->tap_double.en;
-  int_dur.latency = val->tap_double.latency;
+  wake_up_ths.single_double_tap = val->tap_double.en & 0x01U;
+  int_dur.latency = val->tap_double.latency & 0x0FU;
 
   ret += lis2du12_write_reg(ctx, LIS2DU12_WAKE_UP_THS,
                             (uint8_t *)&wake_up_ths, 1);
@@ -1829,8 +1827,8 @@ int32_t lis2du12_orientation_mode_set(const stmdev_ctx_t *ctx,
     return ret;
   }
 
-  tap_ths_x.d6d_ths = (uint8_t)val->threshold;
-  tap_ths_x.d4d_en = (uint8_t)val->deg_of_freedom;
+  tap_ths_x.d6d_ths = (uint8_t)val->threshold & 0x03U;
+  tap_ths_x.d4d_en = (uint8_t)val->deg_of_freedom & 0x01U;
 
   ret += lis2du12_write_reg(ctx, LIS2DU12_TAP_THS_X, (uint8_t *)&tap_ths_x, 1);
 
