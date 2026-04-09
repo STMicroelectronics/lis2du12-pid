@@ -926,8 +926,7 @@ typedef struct
 } lis2du12_fifo_status_t;
 int32_t lis2du12_fifo_status_get(const stmdev_ctx_t *ctx, lis2du12_fifo_status_t *val);
 
-int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *md,
-                                uint8_t *val);
+int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
 typedef struct
 {

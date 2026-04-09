@@ -944,13 +944,11 @@ int32_t lis2du12_fifo_status_get(const stmdev_ctx_t *ctx, lis2du12_fifo_status_t
   * @brief  Get the number of samples stored in FIFO.[get]
   *
   * @param  ctx   communication interface handler.(ptr)
-  * @param  md    the sensor conversion parameters.(ptr)
   * @param  val   number of samples stored in FIFO.(ptr)
   * @retval       interface status (MANDATORY: return 0 -> no Error)
   *
   */
-int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, lis2du12_fifo_md_t *md,
-                                uint8_t *val)
+int32_t lis2du12_fifo_level_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lis2du12_fifo_status2_t fifo_status2 = {0};
   int32_t ret = 0;
