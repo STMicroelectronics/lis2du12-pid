@@ -30,7 +30,22 @@ This directory contains the LIS2DU12 component drivers.
 # Update history
 
 ::: {.collapse}
-<input type="checkbox" id="collapse-section12" checked aria-hidden="true">
+<input type="checkbox" id="collapse-section13" checked aria-hidden="true">
+<label for="collapse-section13" aria-hidden="true">V3.0.2 / 08-Oct-2026</label>
+<div>
+
+## Main changes
+
+- Remove md parameter in fifo_level_get API
+- Fix gcc and clang compilation warnings
+- Fix free_fall_mode_set/get APIs
+- Fix some MISRA issues
+
+##
+
+</div>
+
+<input type="checkbox" id="collapse-section12" aria-hidden="true">
 <label for="collapse-section12" aria-hidden="true">V3.0.1 / 18-Mar-2026</label>
 <div>
 
